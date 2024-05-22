@@ -194,6 +194,7 @@ prompt for credentials:i:1
     `;
     
         const filePath = path.join(__dirname, 'putty_connect.bat');
+        console.log(`***************${filePath}****************`)
     
         fs.writeFile(filePath, batchContent, (err) => {
             if (err) {
@@ -241,7 +242,7 @@ prompt for credentials:i:1
             const timeout = setTimeout(() => {
                 console.error('El proceso hijo se ha excedido del tiempo de espera');
                 childProcess.kill('SIGINT'); // Intenta detener el proceso hijo
-            }, 5000); // Tiempo de espera en milisegundos (por ejemplo, 5 segundos)
+            }, 10000); // Tiempo de espera en milisegundos (por ejemplo, 5 segundos)
         });
     }
     
@@ -258,10 +259,12 @@ prompt for credentials:i:1
 const ip = '192.168.1.100'; // Reemplaza con la IP del servidor
 const user = 'usuario';      // Reemplaza con el nombre de usuario
 const password = 'contraseña'; // Reemplaza con la contraseña
-const puttyExecutablePath = 'C:\\Program Files\\PuTTY'; // Ruta al ejecutable de PuTTY
+//const puttyExecutablePath = path.join(__dirname, 'PuTTY.exe'); // Ruta al ejecutable de PuTTY
+const puttyExecutablePath = path.join("C:\PuTTY.exe");  // Ruta al ejecutable de PuTTY
 
 // Comando para ejecutar PuTTY
 const puttyCommand = `${puttyExecutablePath} -ssh ${user}@${ip} -pw ${password}`;
+console.log('Comando a ejecutar:', puttyCommand);
 
 // Ejecutar PuTTY desde Node.js
 const childProcess = exec(puttyCommand, (error, stdout, stderr) => {
@@ -294,7 +297,7 @@ childProcess.on('close', (code) => {
 const timeout = setTimeout(() => {
     console.error('El proceso hijo se ha excedido del tiempo de espera');
     childProcess.kill('SIGINT'); // Intenta detener el proceso hijo
-}, 5000); // Tiempo de espera en milisegundos (por ejemplo, 5 segundos)
+}, 5000); // Tiempo de espera en milisegundos (por ejemplo, 5 segundos) // Tiempo de espera en milisegundos (por ejemplo, 5 segundos)
   }
 }
 
